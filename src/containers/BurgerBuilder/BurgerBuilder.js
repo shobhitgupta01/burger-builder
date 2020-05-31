@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Aux from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -65,13 +65,18 @@ class BurgerBuilder extends Component {
     }
 
     render() {
+        let disabledInfo = {...this.state.ingredients};
+        for (let key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0;
+        }
         return (
             <Aux>
-                <div><Burger ingredients={this.state.ingredients} /></div>
+                <div><Burger ingredients={this.state.ingredients}/></div>
                 <div>
                     <BuildControls
                         addIngredient={this.addIngredientHandler}
                         removeIngredient={this.removeIngredientHandler}
+                        disabled={disabledInfo}
                     /></div>
             </Aux>
         );
